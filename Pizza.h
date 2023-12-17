@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "IOutput.h"
+#include "Ingredient.h"
 
 enum class SIZE{
     s25,
@@ -12,17 +14,24 @@ enum class SIZE{
 class Pizza : public IOutput{
 public:
     Pizza();
+    Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size);
     
-    void output() override;
+    void addIngredient(Ingredient* ingredient);
+    void removeIngredient(Ingredient* ingrdient);
+
     std::string getName();
     std::string getAbout();
-    SIZE getSize();
+    unsigned getSize();
     unsigned getPrice();
 
-protected:
-    virtual void updatePrice();
+    void output() override;
 
 protected:
+    void updatePrice();
+
+protected:
+    std::vector<Ingredient*>ingredients;
+
     std::string name;
     std::string about;
     SIZE size;
