@@ -6,6 +6,9 @@ class Ingredient : public IOutput{
 public:
     Ingredient();
     Ingredient(std::string _name, unsigned _price);
+    
+    void add();
+    void remove();
 
     unsigned getPrice();
     unsigned getCnt();

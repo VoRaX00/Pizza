@@ -8,6 +8,16 @@ Ingredient::Ingredient(std::string _name, unsigned _price)
     price = _price;
 }
 
+void Ingredient::add()
+{
+    cnt++;
+}
+
+void Ingredient::remove()
+{
+    cnt--;
+}
+
 unsigned Ingredient::getPrice()
 {
     return price;

@@ -1,3 +1,7 @@
 #include "Chease.h"
+#include <iostream>
 
-Chease::Chease() : Ingredient("Chease", 10){}
+void Chease::output()
+{
+    std::cout << "Ingredient: " << name << " Price: " << price << std::endl; 
+}

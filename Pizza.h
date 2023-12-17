@@ -17,7 +17,7 @@ public:
     Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size);
     
     void addIngredient(Ingredient* ingredient);
-    void removeIngredient(Ingredient* ingrdient);
+    void removeIngredient(Ingredient* ingredient);
 
     std::string getName();
     std::string getAbout();
@@ -26,8 +26,11 @@ public:
 
     void output() override;
 
+    bool operator == (Pizza& pizza);
+
 protected:
     void updatePrice();
+    Ingredient* findIngredient(Ingredient* ingredient);
 
 protected:
     std::vector<Ingredient*>ingredients;

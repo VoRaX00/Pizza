@@ -1,5 +1,6 @@
 #include "Pizza.h"
 #include <iostream>
+#include <tuple>
 Pizza::Pizza(){}
 
 Pizza::Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size)
@@ -10,6 +11,18 @@ Pizza::Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size)
     size = _size;
 }
 
+void Pizza::addIngredient(Ingredient *ingredient)
+{
+    auto it = findIngredient(ingredient);
+    it->add();
+}
+
+void Pizza::removeIngredient(Ingredient *ingredient)
+{
+    auto it = findIngredient(ingredient);
+    it->remove();
+}
+
 void Pizza::output()
 {
     std::cout << "Pizza: " << name <<" Price: " << price << " Size: " << getSize() <<std::endl
@@ -17,6 +30,12 @@ void Pizza::output()
     for(auto i : ingredients){
         i->output();
     }
+}
+
+bool Pizza::operator==(Pizza &pizza)
+{
+    return std::tie(name, price, about, size, ingredients) 
+    == std::tie(pizza.name, pizza.price, pizza.about, pizza.size, pizza.ingredients);
 }
 
 std::string Pizza::getName()
@@ -59,4 +78,13 @@ void Pizza::updatePrice()
         newPrice += i->calcPrice();
     }
     price = newPrice;
+}
+
+Ingredient *Pizza::findIngredient(Ingredient* ingredient)
+{
+    for(auto i : ingredients){
+        if(typeid(i) == typeid(ingredient))
+            return i;
+    }
+    return nullptr;
 }
