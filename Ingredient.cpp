@@ -40,5 +40,5 @@ unsigned Ingredient::calcPrice()
 
 void Ingredient::output()
 {
-    std::cout << "Ingredient: " << name  << " Price " << price <<" Count " << cnt << std::endl;
+    std::cout << "Ingredient: " << name  << " Price: " << price <<" Count: " << cnt << std::endl;
 }

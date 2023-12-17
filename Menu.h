@@ -6,9 +6,13 @@ class Menu : public IOutput{
 public:
     Menu();
     void output() override;
+
+private:
     void addPizza();
     void removePizza();
     void completeOrder();
+    void addIngredient(Pizza* pizza);
+    void removeIngredient(Pizza* pizza);
 
 private:
     Order* order;

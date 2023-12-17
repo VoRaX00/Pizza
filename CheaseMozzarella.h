@@ -2,8 +2,8 @@
 #include "Ingredient.h"
 #include "IOutput.h"
 
-class CheaseMozzarella : public Ingredient, public IOutput{
+class CheaseMozzarella : public Ingredient{
 public:
     CheaseMozzarella() : Ingredient("Chease Mozzarella", 275){}
-    void output() override;
+private:
 };

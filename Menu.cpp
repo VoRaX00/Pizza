@@ -1,9 +1,14 @@
 #include "Menu.h"
-#include <iostream>
 #include "Mozzarella.h"
 #include "MeatPizza.h"
 #include "CheasePizza.h"
 #include "PineapplePizza.h"
+#include "Salt.h"
+#include "Chease.h"
+#include "CheaseMozzarella.h"
+#include <iostream>
+#include <stdlib.h>
+#include <limits>
 
 Menu::Menu()
 {
@@ -24,7 +29,9 @@ void Menu::output()
     while (!ok)
     {
         std::cin >> num;
-        if(std::cin.fail()){
+        if(std::cin.fail()){ //проверка если введено не число
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Fail enter, please repeate\n";
             continue;
         }
@@ -54,6 +61,7 @@ void Menu::output()
         default:
             break;
         }
+        system("clear");
         output();
     }
 
@@ -66,25 +74,43 @@ void Menu::addPizza()
     {
         std::cin >> num;
         if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Fail enter, please repeate\n";
             continue;
         }
         switch (num)
         {
-        case 1:
-            appender->append(order, new CheasePizza());
-            return;
-        case 2:
-            appender->append(order, new MeatPizza());
-            return;
-        case 3:
-            appender->append(order, new Mozzarella());
-            return;
-        case 4:
-            appender->append(order, new PineapplePizza());
-            return;
-        default:
-            break;
+            case 1:
+            {
+                Pizza* pizza = new CheasePizza();
+                appender->append(order, pizza);
+                addIngredient(pizza);
+                return;
+            }
+            case 2:
+            {
+                Pizza* pizza = new MeatPizza();
+                appender->append(order, pizza);
+                addIngredient(pizza);
+                return;
+            }
+            case 3:
+            {
+                Pizza* pizza = new Mozzarella();
+                appender->append(order, pizza);
+                addIngredient(pizza);
+                return;
+            }
+            case 4:
+            {
+                Pizza* pizza = new PineapplePizza();
+                appender->append(order, pizza);
+                addIngredient(pizza);
+                return;
+            }
+            default:
+                break;
         }
     }
 }
@@ -96,6 +122,8 @@ void Menu::removePizza()
     {
         std::cin >> num;
         if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Fail enter, please repeate\n";
             continue;
         }
@@ -122,4 +150,78 @@ void Menu::removePizza()
 void Menu::completeOrder()
 {
     order->cookingPizzes();
+}
+
+void Menu::addIngredient(Pizza* pizza)
+{
+    int num;
+    while (true)
+    {
+        std::cout << "What ingredient do you want to add?\n"
+        <<"1.Salt\n"
+        <<"2.Chease\n"
+        <<"3.All right\n";
+        std::cin >> num;
+
+        if(std::cin.fail()){ //проверка если введено не число
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Fail enter, please repeate\n";
+            continue;
+        }
+
+        switch (num)
+        {
+            case 1:
+                appender->append(pizza, new Salt());
+                break;
+            case 2:
+                if(dynamic_cast<Mozzarella*>(pizza) == nullptr)
+                    appender->append(pizza, new Chease());
+                else
+                    appender->append(pizza, new CheaseMozzarella());
+                break;
+            case 3:
+                return;
+            default:
+                break;
+        }
+    }
+}
+
+void Menu::removeIngredient(Pizza* pizza)
+{
+    int num;
+    while (true)
+    {
+        std::cout << "What ingredient do you want to remove?\n"
+        <<"1.Salt\n"
+        <<"2.Chease\n"
+        <<"3.All right\n";
+        std::cin >> num;
+
+        if(std::cin.fail()){ //проверка если введено не число
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Fail enter, please repeate\n";
+            continue;
+        }
+
+        switch (num)
+        {
+            case 1:
+                remover->remove(pizza, new Salt());
+                break;
+            case 2:
+                if(dynamic_cast<Mozzarella*>(pizza) == nullptr)
+                    remover->remove(pizza, new Chease());
+                else
+                    remover->remove(pizza, new CheaseMozzarella());
+                break;
+            case 3:
+                return;
+            default:
+                break;
+        }
+    }
 }
