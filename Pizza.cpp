@@ -34,8 +34,17 @@ void Pizza::output()
 
 bool Pizza::operator==(Pizza &pizza)
 {
-    return std::tie(name, price, about, size, ingredients) 
-    == std::tie(pizza.name, pizza.price, pizza.about, pizza.size, pizza.ingredients);
+    bool equal = true;
+    for(auto i = ingredients.begin(), j = pizza.ingredients.begin(); 
+    i != ingredients.end() && j != pizza.ingredients.end(); i++, j++){
+        if((*i)->getCnt() != (*j)->getCnt() || (*i)->getName() != (*j)->getName()){
+            equal = false;
+            break;
+        }
+    }
+
+    return std::tie(name, price, about, size) == std::tie(pizza.name, pizza.price, pizza.about, pizza.size) 
+    && equal && ingredients.size() == pizza.ingredients.size();
 }
 
 std::string Pizza::getName()

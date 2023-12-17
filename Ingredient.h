@@ -10,6 +10,7 @@ public:
     void add();
     void remove();
 
+    std::string getName();
     unsigned getPrice();
     unsigned getCnt();
     unsigned calcPrice();

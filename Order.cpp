@@ -1,4 +1,5 @@
 #include "Order.h"
+#include <iostream>
 
 Order::Order(){}
 
@@ -15,5 +16,26 @@ void Order::removePizza(Pizza *pizza)
             pizzes.erase(it);
             return;
         }
+    }
+}
+
+void Order::printPizzes()
+{
+    for(auto i : pizzes){
+        i->output();
+    }
+}
+
+void Order::cookingPizzes()
+{
+    std::cout << "Your order cooking!:D\n";
+    pizzes.clear();
+}
+
+void Order::output()
+{
+    std::cout << "Order:\n";
+    for(auto i : pizzes){
+        i->output();
     }
 }

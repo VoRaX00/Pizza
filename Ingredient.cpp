@@ -18,6 +18,11 @@ void Ingredient::remove()
     cnt--;
 }
 
+std::string Ingredient::getName()
+{
+    return name;
+}
+
 unsigned Ingredient::getPrice()
 {
     return price;

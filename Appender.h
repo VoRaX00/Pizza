@@ -3,6 +3,6 @@
 
 class Appender{
 public:
-    void Append(Order* order, Pizza* pizza);
-    void Append(Pizza* pizza, Ingredient* ingredient);
+    void append(Order* order, Pizza* pizza);
+    void append(Pizza* pizza, Ingredient* ingredient);
 };

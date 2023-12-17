@@ -3,6 +3,6 @@
 
 class Remover{
 public:
-    void Remove(Order* order, Pizza* pizza);
-    void Remove(Pizza* pizza, Ingredient* ingredient);
+    void remove(Order* order, Pizza* pizza);
+    void remove(Pizza* pizza, Ingredient* ingredient);
 };

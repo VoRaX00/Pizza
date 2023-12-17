@@ -1,11 +1,11 @@
 #include "Remover.h"
 
-void Remover::Remove(Order *order, Pizza *pizza)
+void Remover::remove(Order *order, Pizza *pizza)
 {
     order->removePizza(pizza);
 }
 
-void Remover::Remove(Pizza *pizza, Ingredient *ingredient)
+void Remover::remove(Pizza *pizza, Ingredient *ingredient)
 {
     pizza->removeIngredient(ingredient);
 }
