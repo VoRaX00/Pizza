@@ -85,28 +85,32 @@ void Menu::addPizza()
             {
                 Pizza* pizza = new CheasePizza();
                 appender->append(order, pizza);
-                addIngredient(pizza);
+                setSize(pizza);
+                addOrRemoveIngredient(pizza);
                 return;
             }
             case 2:
             {
                 Pizza* pizza = new MeatPizza();
                 appender->append(order, pizza);
-                addIngredient(pizza);
+                setSize(pizza);
+                addOrRemoveIngredient(pizza);
                 return;
             }
             case 3:
             {
                 Pizza* pizza = new Mozzarella();
                 appender->append(order, pizza);
-                addIngredient(pizza);
+                setSize(pizza);
+                addOrRemoveIngredient(pizza);
                 return;
             }
             case 4:
             {
                 Pizza* pizza = new PineapplePizza();
                 appender->append(order, pizza);
-                addIngredient(pizza);
+                setSize(pizza);
+                addOrRemoveIngredient(pizza);
                 return;
             }
             default:
@@ -182,6 +186,7 @@ void Menu::addIngredient(Pizza* pizza)
                     appender->append(pizza, new CheaseMozzarella());
                 break;
             case 3:
+                pizza->updatePrice();
                 return;
             default:
                 break;
@@ -219,9 +224,86 @@ void Menu::removeIngredient(Pizza* pizza)
                     remover->remove(pizza, new CheaseMozzarella());
                 break;
             case 3:
+                addOrRemoveIngredient(pizza);
                 return;
             default:
                 break;
+        }
+    }
+}
+
+void Menu::addOrRemoveIngredient(Pizza *pizza)
+{
+    int num;
+    while(true){
+        std::cout << "Do you want to add or remove ingredient?\n"
+        <<"1.Add\n"
+        <<"2.Remove\n"
+        <<"3.Nothing\n";
+
+        std::cin >> num;
+
+        if(std::cin.fail()){ //проверка если введено не число
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Fail enter, please repeate\n";
+            continue;
+        }
+
+        switch (num)
+        {
+            case 1:
+                addIngredient(pizza);
+                break;
+            case 2:
+                removeIngredient(pizza);
+                break;
+            case 3:
+                pizza->updatePrice();
+                return;
+            default:
+                break;
+        }
+    }
+}
+
+void Menu::setSize(Pizza *pizza)
+{
+    int num;
+    while(true){
+        std::cout << "Choose size pizza:\n"<< "1. 25\n" << "2. 30\n" <<"3. 35\n" << "4. 40\n";
+        std::cin >> num;
+        if(std::cin.fail()){ //проверка если введено не число
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Fail enter, please repeate\n";
+            continue;
+        }
+        switch (num)
+        {
+        case 1:
+        {
+            pizza->setSize(SIZE::s25);
+            return;
+        }
+        case 2:
+        {
+            pizza->setSize(SIZE::s30);
+            return;
+        }
+        case 3:
+        {
+            pizza->setSize(SIZE::s35);
+            return;
+        }
+        case 4:
+        {
+            pizza->setSize(SIZE::s40);
+            return;
+        }
+        
+        default:
+            break;
         }
     }
 }

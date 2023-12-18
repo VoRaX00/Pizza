@@ -13,6 +13,8 @@ private:
     void completeOrder();
     void addIngredient(Pizza* pizza);
     void removeIngredient(Pizza* pizza);
+    void addOrRemoveIngredient(Pizza* pizza);
+    void setSize(Pizza* pizza);
 
 private:
     Order* order;

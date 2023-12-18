@@ -89,10 +89,15 @@ void Pizza::updatePrice()
     price = newPrice;
 }
 
+void Pizza::setSize(SIZE _size)
+{
+    size = _size;
+}
+
 Ingredient *Pizza::findIngredient(Ingredient* ingredient)
 {
     for(auto i : ingredients){
-        if(typeid(i) == typeid(ingredient))
+        if(i->getName() == ingredient->getName())
             return i;
     }
     return nullptr;

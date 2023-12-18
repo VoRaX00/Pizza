@@ -23,13 +23,16 @@ public:
     std::string getAbout();
     unsigned getSize();
     unsigned getPrice();
+    void updatePrice();
+
+    void setSize(SIZE _size);
 
     void output() override;
 
     bool operator == (Pizza& pizza);
 
 protected:
-    void updatePrice();
+    
     Ingredient* findIngredient(Ingredient* ingredient);
 
 protected:
