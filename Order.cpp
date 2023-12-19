@@ -12,7 +12,7 @@ void Order::removePizza(Pizza *pizza)
 {
     Pizza* it = nullptr;
     for(auto it = pizzes.begin(); it != pizzes.end(); it++){
-        if(*pizza == *(*it)){
+        if(pizza->getName() == (*it)->getName()){
             pizzes.erase(it);
             return;
         }
