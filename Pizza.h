@@ -16,8 +16,8 @@ public:
     Pizza();
     Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size);
     
-    void addIngredient(Ingredient* ingredient);
-    void removeIngredient(Ingredient* ingredient);
+    void addIngredient(std::shared_ptr<Ingredient> ingredient);
+    void removeIngredient(std::shared_ptr<Ingredient> ingredient);
 
     std::string getName();
     std::string getAbout();
@@ -33,10 +33,12 @@ public:
 
 protected:
     
-    Ingredient* findIngredient(Ingredient* ingredient);
+    //Ingredient* findIngredient(Ingredient* ingredient);
+    std::shared_ptr<Ingredient> findIngredient(std::shared_ptr<Ingredient> ingredient);
 
 protected:
-    std::vector<Ingredient*>ingredients;
+    //std::vector<Ingredient*>ingredients;
+    std::vector<std::shared_ptr<Ingredient>>ingredients;
 
     std::string name;
     std::string about;

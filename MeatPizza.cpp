@@ -5,5 +5,6 @@
 
 MeatPizza::MeatPizza() : Pizza("Meat pizza", 350, "This is meat pizza", SIZE::s25)
 {
-    ingredients = std::vector<Ingredient*>{new Chease(), new Salt(), new Meat()};
+    ingredients = std::vector<std::shared_ptr<Ingredient>>{std::make_shared<Chease>(), 
+    std::make_shared<Salt>(), std::make_shared<Meat>()};
 }

@@ -3,12 +3,12 @@
 
 Order::Order(){}
 
-void Order::addPizza(Pizza *pizza)
+void Order::addPizza(std::shared_ptr<Pizza> pizza)
 {
     pizzes.push_back(pizza);
 }
 
-void Order::removePizza(Pizza *pizza)
+void Order::removePizza(std::shared_ptr<Pizza> pizza)
 {
     Pizza* it = nullptr;
     for(auto it = pizzes.begin(); it != pizzes.end(); it++){

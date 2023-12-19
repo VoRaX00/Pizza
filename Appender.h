@@ -1,8 +1,9 @@
 #pragma once
 #include "Order.h"
+#include <memory>
 
 class Appender{
 public:
-    void append(Order* order, Pizza* pizza);
-    void append(Pizza* pizza, Ingredient* ingredient);
+    void append(std::shared_ptr<Order> order, std::shared_ptr<Pizza> pizza);
+    void append(std::shared_ptr<Pizza> pizza, std::shared_ptr<Ingredient> ingredient);
 };

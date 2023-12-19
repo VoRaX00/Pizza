@@ -12,9 +12,9 @@
 
 Menu::Menu()
 {
-    order = new Order();
-    appender = new Appender();
-    remover = new Remover();
+    order = std::make_shared<Order>();
+    appender = std::make_shared<Appender>();
+    remover = std::make_shared<Remover>();
 }
 
 void Menu::output()
@@ -83,7 +83,7 @@ void Menu::addPizza()
         {
             case 1:
             {
-                Pizza* pizza = new CheasePizza();
+                std::shared_ptr<Pizza> pizza = std::make_shared<CheasePizza>();
                 appender->append(order, pizza);
                 setSize(pizza);
                 addOrRemoveIngredient(pizza);
@@ -91,7 +91,7 @@ void Menu::addPizza()
             }
             case 2:
             {
-                Pizza* pizza = new MeatPizza();
+                std::shared_ptr<Pizza> pizza = std::make_shared<MeatPizza>();
                 appender->append(order, pizza);
                 setSize(pizza);
                 addOrRemoveIngredient(pizza);
@@ -99,7 +99,7 @@ void Menu::addPizza()
             }
             case 3:
             {
-                Pizza* pizza = new Mozzarella();
+                std::shared_ptr<Pizza> pizza = std::make_shared<Mozzarella>();
                 appender->append(order, pizza);
                 setSize(pizza);
                 addOrRemoveIngredient(pizza);
@@ -107,7 +107,7 @@ void Menu::addPizza()
             }
             case 4:
             {
-                Pizza* pizza = new PineapplePizza();
+                std::shared_ptr<Pizza> pizza = std::make_shared<PineapplePizza>();
                 appender->append(order, pizza);
                 setSize(pizza);
                 addOrRemoveIngredient(pizza);
@@ -134,16 +134,16 @@ void Menu::removePizza()
         switch (num)
         {
         case 1:
-            remover->remove(order, new CheasePizza());
+            remover->remove(order, std::make_shared<CheasePizza>());
             return;
         case 2:
-            remover->remove(order, new MeatPizza());
+            remover->remove(order, std::make_shared<MeatPizza>());
             return;
         case 3:
-            remover->remove(order, new Mozzarella());
+            remover->remove(order, std::make_shared<Mozzarella>());
             return;
         case 4:
-            remover->remove(order, new PineapplePizza());
+            remover->remove(order, std::make_shared<PineapplePizza>());
             return;
         default:
             break;
@@ -156,7 +156,7 @@ void Menu::completeOrder()
     order->cookingPizzes();
 }
 
-void Menu::addIngredient(Pizza* pizza)
+void Menu::addIngredient(std::shared_ptr<Pizza> pizza)
 {
     int num;
     while (true)
@@ -177,13 +177,13 @@ void Menu::addIngredient(Pizza* pizza)
         switch (num)
         {
             case 1:
-                appender->append(pizza, new Salt());
+                appender->append(pizza, std::make_shared<Salt>());
                 break;
             case 2:
-                if(dynamic_cast<Mozzarella*>(pizza) == nullptr)
-                    appender->append(pizza, new Chease());
+                if(pizza->getName() != "Mozzarella")
+                    appender->append(pizza, std::make_shared<Chease>());
                 else
-                    appender->append(pizza, new CheaseMozzarella());
+                    appender->append(pizza, std::make_shared<CheaseMozzarella>());
                 break;
             case 3:
                 pizza->updatePrice();
@@ -194,7 +194,7 @@ void Menu::addIngredient(Pizza* pizza)
     }
 }
 
-void Menu::removeIngredient(Pizza* pizza)
+void Menu::removeIngredient(std::shared_ptr<Pizza> pizza)
 {
     int num;
     while (true)
@@ -215,13 +215,13 @@ void Menu::removeIngredient(Pizza* pizza)
         switch (num)
         {
             case 1:
-                remover->remove(pizza, new Salt());
+                remover->remove(pizza, std::make_shared<Salt>());
                 break;
             case 2:
-                if(dynamic_cast<Mozzarella*>(pizza) == nullptr)
-                    remover->remove(pizza, new Chease());
+                if(pizza->getName() != "Mozzarella")
+                    remover->remove(pizza, std::make_shared<Chease>());
                 else
-                    remover->remove(pizza, new CheaseMozzarella());
+                    remover->remove(pizza, std::make_shared<CheaseMozzarella>());
                 break;
             case 3:
                 addOrRemoveIngredient(pizza);
@@ -232,7 +232,7 @@ void Menu::removeIngredient(Pizza* pizza)
     }
 }
 
-void Menu::addOrRemoveIngredient(Pizza *pizza)
+void Menu::addOrRemoveIngredient(std::shared_ptr<Pizza> pizza)
 {
     int num;
     while(true){
@@ -267,7 +267,7 @@ void Menu::addOrRemoveIngredient(Pizza *pizza)
     }
 }
 
-void Menu::setSize(Pizza *pizza)
+void Menu::setSize(std::shared_ptr<Pizza> pizza)
 {
     int num;
     while(true){

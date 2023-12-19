@@ -4,6 +4,6 @@
 
 class CheaseMozzarella : public Ingredient{
 public:
-    CheaseMozzarella() : Ingredient("Chease Mozzarella", 275){}
+    CheaseMozzarella() : Ingredient("Chease Mozzarella", 275) {}
 private:
 };

@@ -11,13 +11,13 @@ Pizza::Pizza(std::string _name, unsigned _price, std::string _about, SIZE _size)
     size = _size;
 }
 
-void Pizza::addIngredient(Ingredient *ingredient)
+void Pizza::addIngredient(std::shared_ptr<Ingredient> ingredient)
 {
     auto it = findIngredient(ingredient);
     it->add();
 }
 
-void Pizza::removeIngredient(Ingredient *ingredient)
+void Pizza::removeIngredient(std::shared_ptr<Ingredient> ingredient)
 {
     auto it = findIngredient(ingredient);
     it->remove();
@@ -94,11 +94,21 @@ void Pizza::setSize(SIZE _size)
     size = _size;
 }
 
-Ingredient *Pizza::findIngredient(Ingredient* ingredient)
+// Ingredient *Pizza::findIngredient(Ingredient* ingredient)
+// {
+//     for(auto i : ingredients){
+//         if(i->getName() == ingredient->getName())
+//             return i;
+//     }
+//     return nullptr;
+// }
+
+std::shared_ptr<Ingredient> Pizza::findIngredient(std::shared_ptr<Ingredient> ingredient)
 {
     for(auto i : ingredients){
         if(i->getName() == ingredient->getName())
             return i;
     }
+    //return std::make_shared<Ingredient>(nullptr);
     return nullptr;
 }
